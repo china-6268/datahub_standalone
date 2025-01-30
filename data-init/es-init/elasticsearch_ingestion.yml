@@ -1,0 +1,35 @@
+source:
+  type: "elasticsearch"
+  config:
+    # Coordinates
+    host: "localhost:29200"  # Elasticsearch 主机地址
+
+    # Credentials
+    username: "elastic"  
+    password: "elastic" 
+
+    # SSL support
+    use_ssl: False  # 如果启用 SSL，改为 True
+    verify_certs: False  # 是否验证 SSL 证书
+    ca_certs: "./path/ca.cert"  # SSL 根证书路径（可选）
+    client_cert: "./path/client.cert"  # 客户端证书路径（可选）
+    client_key: "./path/client.key"  # 客户端私钥路径（可选）
+    ssl_assert_hostname: False  # 是否验证主机名
+    ssl_assert_fingerprint: "./path/cert.fingerprint"  # SSL 指纹路径（可选）
+
+    # Options
+    url_prefix: ""  # 可选的 URL 前缀
+    env: "PROD"  # 数据环境（如 PROD、DEV）
+    index_pattern:
+      allow: [".*000001$"]  # 精确匹配以 "000001" 结尾的索引
+      deny: [".*skip_index_name_pattern.*"]  # 拒绝的索引名称模式（可选）
+    ingest_index_templates: False  # 是否摄入索引模板
+    index_template_pattern:
+      allow: [".*some_index_template_name_pattern.*"]  # 允许的索引模板模式
+
+sink:
+  type: "datahub-rest"
+  config:
+    server: "http://localhost:28080"  
+    token: "eyJhbGciOiJIUzI1NiJ9.eyJhY3RvclR5cGUiOiJVU0VSIiwiYWN0b3JJZCI6ImRhdGFodWIiLCJ0eXBlIjoiUEVSU09OQUwiLCJ2ZXJzaW9uIjoiMiIsImp0aSI6Ijk3NjcyNGNjLWIxNWItNDA1OC05NGQwLTkxN2UzNmEyYTk5MyIsInN1YiI6ImRhdGFodWIiLCJleHAiOjE3NDQ3Mjc5OTcsImlzcyI6ImRhdGFodWItbWV0YWRhdGEtc2VydmljZSJ9.qBa0AyG6Tr2DMBHUIu5vO1yqtJx5v2Ymu09LUiXssKk"  # 替换为您的实际 API Token
+

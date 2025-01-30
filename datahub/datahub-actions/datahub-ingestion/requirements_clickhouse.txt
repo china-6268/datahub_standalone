@@ -1,0 +1,5 @@
+acryl-datahub[datahub-rest,datahub-kafka,clickhouse]==0.15.0
+pydantic==1.10.20
+numpy<2.0.0,>=1.19.0
+traitlets>=5.6.0,<6.0.0
+thinc<8.3.0,>=8.2.0

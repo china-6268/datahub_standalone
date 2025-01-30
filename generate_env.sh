@@ -1,0 +1,45 @@
+#!/bin/bash
+# 动态生成 .env 文件的脚本
+
+# 设置基准端口（万位）
+BASE_PORT=${1:-20000}  # 默认基准端口为 20000
+
+# 生成 .env 文件
+cat <<EOF > .env
+# Base port (万位)
+BASE_PORT=$BASE_PORT
+
+# DataHub version
+# DATAHUB_VERSION=0.14.1
+
+# NEO4j
+DATAHUB_MAPPED_NEO4J_HTTP_PORT=$(($BASE_PORT + 7474))
+DATAHUB_MAPPED_NEO4J_BOLT_PORT=$(($BASE_PORT + 7687))
+
+# Kafka Broker
+DATAHUB_MAPPED_KAFKA_BROKER_PORT=$(($BASE_PORT + 9092))
+
+# Schema Registry
+DATAHUB_MAPPED_SCHEMA_REGISTRY_PORT=$(($BASE_PORT + 8081))
+
+# DataHub Frontend
+DATAHUB_MAPPED_FRONTEND_PORT=$(($BASE_PORT + 9002))
+
+# DataHub GMS
+DATAHUB_MAPPED_GMS_PORT=$(($BASE_PORT + 8080))
+#  # 启用身份认证
+METADATA_SERVICE_AUTH_ENABLED=false
+
+# Elasticsearch
+DATAHUB_MAPPED_ELASTIC_PORT=$(($BASE_PORT + 9200))
+
+# MySQL
+DATAHUB_MAPPED_MYSQL_PORT=$(($BASE_PORT + 3306))
+
+# Zookeeper
+DATAHUB_MAPPED_ZK_PORT=$(($BASE_PORT + 2181))
+EOF
+
+echo ".env 文件已生成，基准端口为 $BASE_PORT"
+
+

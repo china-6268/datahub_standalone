@@ -1,0 +1,12 @@
+source:
+    type: superset
+    config:
+        host_port: '192.168.150.110:18088'
+        username: admin
+        password: admin
+        provider: db
+sink:
+    type: datahub-rest
+    config:
+        server: 'http://192.168.150.110:28080'
+        token: 'eyJhbGciOiJIUzI1NiJ9.eyJhY3RvclR5cGUiOiJVU0VSIiwiYWN0b3JJZCI6ImRhdGFodWIiLCJ0eXBlIjoiUEVSU09OQUwiLCJ2ZXJzaW9uIjoiMiIsImp0aSI6IjJmY2U3MzYyLWFhZmEtNDU1NC1hZDg0LTZhMjhkMWIzMzQ5YiIsInN1YiI6ImRhdGFodWIiLCJleHAiOjE3NDQ3OTk0OTMsImlzcyI6ImRhdGFodWItbWV0YWRhdGEtc2VydmljZSJ9.RfHjKj2PQHhrKsAs4HlhJeOBIRQ2UpgZ_hSFMxj4BcM'

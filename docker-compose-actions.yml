@@ -1,0 +1,60 @@
+services:
+  datahub-actions:
+    environment:
+      - ACTIONS_CONFIG=/config/actions.yml
+      - DATAHUB_GMS_HOST=datahub-gms
+      - DATAHUB_GMS_PORT=8080
+      - DATAHUB_GMS_PROTOCOL=http
+      - DATAHUB_SYSTEM_CLIENT_ID=__datahub_system
+      - DATAHUB_SYSTEM_CLIENT_SECRET=JohnSnowKnowsNothing
+      - KAFKA_BOOTSTRAP_SERVER=broker:29092
+      - KAFKA_PROPERTIES_SECURITY_PROTOCOL=PLAINTEXT
+      - METADATA_AUDIT_EVENT_NAME=MetadataAuditEvent_v4
+      - METADATA_CHANGE_LOG_VERSIONED_TOPIC_NAME=MetadataChangeLog_Versioned_v1
+      - SCHEMA_REGISTRY_URL=http://schema-registry:8081
+    hostname: actions
+    image: ${DATAHUB_ACTIONS_IMAGE:-acryldata/datahub-actions}:v0.1.6
+    volumes:
+      - ./datahub/datahub-actions/datahub-ingestion:/datahub-ingestion
+      - ./datahub/datahub-actions/config:/config
+      - ./datahub/datahub-actions/actions_logs:/tmp/logs/datahub/actions
+      - ./datahub/datahub-actions/datahub-actions-cache:/datahub-ingestion/.cache
+      - ./datahub/datahub-actions/datahub-ingestion/.venv:/datahub-ingestion/.venv
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    entrypoint:
+      - /bin/bash
+      - -c
+      - |
+        apt-get update && apt-get install -y vim && \
+        echo "Vim installed successfully." && \
+        exec datahub-actions
+    ports:
+      - "59092:9092"
+      - "58080:8080"
+
+  broker:
+    image: ${DATAHUB_CONFLUENT_KAFKA_IMAGE:-confluentinc/cp-kafka}:${DATAHUB_CONFLUENT_VERSION:-7.4.0}
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092
+    ports:
+      - "59092:29092"
+
+  zookeeper:
+    image: ${DATAHUB_CONFLUENT_ZOOKEEPER_IMAGE:-confluentinc/cp-zookeeper}:${DATAHUB_CONFLUENT_VERSION:-7.4.0}
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "52181:2181"
+
+  datahub-gms:
+    image: ${DATAHUB_GMS_IMAGE:-acryldata/datahub-gms}:${DATAHUB_VERSION:-head}
+    environment:
+      DATAHUB_GMS_HOST: datahub-gms-test
+      DATAHUB_GMS_PORT: 8080
+    ports:
+      - "58080:8080"
+

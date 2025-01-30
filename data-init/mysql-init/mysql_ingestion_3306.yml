@@ -1,0 +1,15 @@
+source:
+  type: mysql
+  config:
+    host_port: "localhost:3306"
+    database: "datahub"
+    username: "datahub"
+    password: "datahub"
+    schema_pattern:
+      allow: [".*"]  # 允许所有数据库
+    table_pattern:
+      allow: [".*"]   # 允许所有表
+sink:
+  type: "datahub-rest"
+  config:
+    server: "http://localhost:8080"

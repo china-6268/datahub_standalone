@@ -1,0 +1,17 @@
+source:
+    type: clickhouse
+    config:
+        host_port: '172.19.0.12:48123'
+        username: default
+        password: default
+        database: focusight_ai_pharma
+        table_pattern:
+            allow:
+                - '.*'
+sink:
+    type: datahub-rest
+    config:
+        server: 'http://172.19.0.6:8080'
+        token: eyJhbGciOiJIUzI1NiJ9.eyJhY3RvclR5cGUiOiJVU0VSIiwiYWN0b3JJZCI6ImRhdGFodWIiLCJ0eXBlIjoiUEVSU09OQUwiLCJ2ZXJzaW9uIjoiMiIsImp0aSI6IjJmY2U3MzYyLWFhZmEtNDU1NC1hZDg0LTZhMjhkMWIzMzQ5YiIsInN1YiI6ImRhdGFodWIiLCJleHAiOjE3NDQ3OTk0OTMsImlzcyI6ImRhdGFodWItbWV0YWRhdGEtc2VydmljZSJ9.RfHjKj2PQHhrKsAs4HlhJeOBIRQ2UpgZ_hSFMxj4BcM
+          
+          

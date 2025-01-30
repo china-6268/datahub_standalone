@@ -1,0 +1,41 @@
+# 使用 Python 3.10 的 Debian 基础镜像
+FROM python:3.10-slim
+
+# 设置环境变量，避免 Python 输出缓冲
+ENV PYTHONUNBUFFERED=1
+
+# 安装必要的系统包
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        libffi-dev \
+        libssl-dev \
+        mariadb-client \
+        curl \
+        && rm -rf /var/lib/apt/lists/*
+
+# 创建工作目录
+WORKDIR /app
+
+# 创建并激活虚拟环境
+RUN python3 -m venv /app/venv
+
+# 设置环境变量以使用虚拟环境中的 Python 和 pip
+ENV PATH="/app/venv/bin:$PATH"
+
+# 升级 pip
+RUN pip install --upgrade pip
+
+# 安装指定版本的 acryl-datahub[mysql]，使用国内镜像并增加超时和重试次数
+RUN pip install --timeout=300 --retries=10 -i https://pypi.tuna.tsinghua.edu.cn/simple 'acryl-datahub[mysql]==0.14.1'
+
+# 清理 build dependencies to reduce image size
+RUN apt-get purge -y --auto-remove build-essential libffi-dev libssl-dev
+
+# 复制 GMS 配置和启动脚本（根据实际情况调整路径）
+# COPY ./datahub-gms /app/datahub-gms
+
+# 设置默认命令以启动 GMS 服务
+# 假设 GMS 的启动命令为 `datahub-gms run`，请根据实际情况调整
+CMD ["datahub-gms", "run"]
+

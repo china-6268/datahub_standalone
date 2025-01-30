@@ -1,0 +1,19 @@
+source:
+  type: mysql
+  config:
+    host_port: "localhost:23306"
+    database: "datahub"
+    username: "datahub"
+    password: "datahub"
+      # schema_pattern:
+    database_pattern:
+      allow: [".*"]  # 允许所有数据库
+    table_pattern:
+      allow: [".*"]   # 允许所有表
+        #table_pattern:
+        #allow: ["customer", "product", "store_sales"]  # 仅采集指定表
+sink:
+  type: "datahub-rest"
+  config:
+    server: "http://localhost:28080"
+    token: "eyJhbGciOiJIUzI1NiJ9.eyJhY3RvclR5cGUiOiJVU0VSIiwiYWN0b3JJZCI6ImRhdGFodWIiLCJ0eXBlIjoiUEVSU09OQUwiLCJ2ZXJzaW9uIjoiMiIsImp0aSI6Ijk3NjcyNGNjLWIxNWItNDA1OC05NGQwLTkxN2UzNmEyYTk5MyIsInN1YiI6ImRhdGFodWIiLCJleHAiOjE3NDQ3Mjc5OTcsImlzcyI6ImRhdGFodWItbWV0YWRhdGEtc2VydmljZSJ9.qBa0AyG6Tr2DMBHUIu5vO1yqtJx5v2Ymu09LUiXssKk"

@@ -1,0 +1,2 @@
+acryl-datahub[datahub-rest,datahub-kafka,mysql]==0.15.0
+pydantic<2

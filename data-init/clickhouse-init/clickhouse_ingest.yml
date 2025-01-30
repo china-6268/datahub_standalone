@@ -1,0 +1,14 @@
+source:
+  type: clickhouse
+  config:
+    host_port: "localhost:48123"
+    username: "default"          # ClickHouse 用户名
+    password: "default"          # ClickHouse 密码
+    database: "focusight_ai_pharma"    # 要连接的数据库名称
+    table_pattern:
+      allow: [".*"]               # 允许所有表，或根据需要指定特定的表模式
+
+sink:
+  type: "datahub-rest"
+  config:
+    server: "http://localhost:28080"  # DataHub REST 接口的主机和端口

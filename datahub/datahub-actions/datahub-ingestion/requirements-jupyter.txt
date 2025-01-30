@@ -1,0 +1,5 @@
+# 与 acryl-datahub 版本兼容
+traitlets>=5.0.0,<5.2.2
+jupyterlab>=4.3.4
+jupyter-server>=2.4.0,<3
+

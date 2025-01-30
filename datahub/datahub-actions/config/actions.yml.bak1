@@ -1,0 +1,13 @@
+name: my_actions_pipeline
+source:
+  type: kafka
+  config:
+    connection:
+      bootstrap_servers: 
+        - "broker:29092"  # Kafka broker 地址
+    consumer_config: {}  # 如果有额外的消费者配置，可以在此处添加
+    topics: 
+      - "MetadataChangeLog_Versioned_v1"  # Kafka 主题名称
+action:
+  type: noop  # 不执行任何操作，仅用于测试
+

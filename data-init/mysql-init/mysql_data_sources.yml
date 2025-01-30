@@ -1,0 +1,17 @@
+sink:
+    type: datahub-rest
+    config:
+        server: 'http://192.168.150.110:28080'
+source:
+    type: mysql
+    config:
+        host_port: '192.168.150.110:23306'
+        database: datahub
+        username: datahub
+        password: datahub
+        schema_pattern:
+            allow:
+                - '.*'
+        table_pattern:
+            allow:
+                - '.*'

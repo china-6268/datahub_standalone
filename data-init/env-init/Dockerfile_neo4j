@@ -1,0 +1,8 @@
+# 使用官方 Neo4j 镜像
+FROM neo4j:4.4
+
+# 安装 curl
+RUN apt-get update && apt-get install -y curl
+
+# 保留官方镜像的默认 ENTRYPOINT
+

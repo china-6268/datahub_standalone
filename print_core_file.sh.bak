@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# 打印 actions.yml 配置文件的内容
+#head -n 111 docker-compose.yml | tail -n 51
+head -n 120 docker-compose.yml| tail -n 60
+echo "==== docker-compose.yml 全部内容) ===="
+cat docker-compose.yml
+
+# 列出当前正在运行的 Docker 容器的名称和端口信息
+echo "==== Docker Containers (Names and Ports) ===="
+sudo docker ps --format "table {{.Names}}\t{{.Ports}}"
+
+# 打印 JupyterLab 容器的最近 20 行日志
+#echo "==== JupyterLab Logs 最近 20 行日志 ===="
+#sudo docker logs --tail 20 verify_2-jupyterlab-1
+
+# 打印 DataHub Actions 容器的最近 20 行日志
+echo "==== DataHub Actions Logs 最近 100 行日志===="
+sudo docker logs --tail 100 verify_3-datahub-actions-1
+
+# 进入 MySQL 容器并以 datahub 用户身份连接到 MySQL
+#echo "==== Enter MySQL inside the container (datahub user) ===="
+#sudo docker exec -u root -it verify_2-mysql-1 mysql -u datahub -p
+
+# 查看 宿主机 datahub版本 
+#echo "====  宿主机 datahub 版本===="
+#datahub version
+echo "====  actions 容器 Dockerfile 的内容 ===="
+cat ./data-init/env-init/actions-init/Dockerfile_actions-v0.1.6

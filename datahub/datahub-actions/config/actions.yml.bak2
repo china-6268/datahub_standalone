@@ -1,0 +1,12 @@
+name: my_actions_pipeline
+source:
+  type: kafka
+  config:
+    bootstrap_servers: 
+      - "broker:29092"  # Kafka broker 地址
+    consumer_config: {}  # 保持为空字典，如果没有额外配置
+    topics: 
+      - "MetadataChangeLog_Versioned_v1"  # Kafka 主题名称
+action:
+  type: noop  # 不执行任何操作，仅用于测试
+

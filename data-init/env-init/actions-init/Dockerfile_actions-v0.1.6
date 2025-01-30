@@ -1,0 +1,11 @@
+FROM acryldata/datahub-actions:v0.1.6
+
+# 切换为 root 用户安装 vim
+USER root
+RUN apt-get update && apt-get install -y vim
+
+# 切换回 datahub 用户
+USER datahub
+
+# 设置 ENTRYPOINT，增加调试信息并加载配置
+ENTRYPOINT ["datahub-actions", "actions", "--config", "/config/actions.yml"]

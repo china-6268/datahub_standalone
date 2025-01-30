@@ -1,0 +1,15 @@
+source:
+    type: clickhouse
+    config:
+        host_port: '192.168.150.110:48123'
+        username: default
+        password: default
+        database: focusight_ai_pharma
+        table_pattern:
+            allow:
+                - '.*'
+sink:
+    type: datahub-rest
+    config:
+        server: 'http://192.168.150.110:28080'
+

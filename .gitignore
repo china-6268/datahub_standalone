@@ -1,0 +1,68 @@
+# 忽略所有 data 和 log 目录
+data/
+logs/
+
+# 忽略所有 lock 文件
+*.lock
+
+# 保留 config 目录
+!config/
+!datahub/datahub-actions/datahub-ingestion/
+!datahub/datahub-actions/config/
+!datahub/datahub-actions/etc_datahub_actions_conf/
+
+# 针对特定路径的忽略规则
+datahub/elasticsearch/config/elasticsearch.keystore
+datahub/broker/data/
+datahub/broker/logs/
+datahub/datahub-actions/data/
+datahub/datahub-actions/logs/
+datahub/datahub-actions/actions_logs/
+datahub/datahub-actions/datahub_logs/
+datahub/datahub-actions/datahub-ingestion/.cache/
+datahub/datahub-actions/datahub-ingestion/.venv/
+datahub/datahub-actions/datahub-ingestion/.local/
+datahub/datahub-actions/datahub-ingestion/.bash_history
+datahub/datahub-actions/datahub-ingestion/.datahub/
+datahub/datahub-actions/datahub-ingestion/miniconda/
+datahub/datahub-frontend-react/data/
+datahub/datahub-frontend-react/logs/
+datahub/datahub-gms/data/
+datahub/datahub-gms/logs/
+datahub/elasticsearch/data/
+datahub/elasticsearch/logs/
+datahub/elasticsearch/tmp/
+datahub/mysql/mysql_data/
+datahub/mysql/logs/
+datahub/mysql/mysql_log/
+datahub/mysql/backups/
+datahub/mysql/tmp/
+datahub/zookeeper/data/
+datahub/zookeeper/log/
+datahub/zookeeper/tmp/
+datahub/datahub-gms/
+datahub/neo4j/
+datahub/jupyter/.jupyter/
+datahub/jupyter/.local/
+datahub/jupyter/.npm/
+**/.venv/
+
+# 允许 config 目录的所有内容
+#!datahub/**/config/
+!datahub/datahub-actions/datahub-ingestion/
+!datahub/jupyter/requirements-jupyter.txt
+!datahub/datahub-actions/datahub-ingestion/requirements-actions.txt
+!datahub/datahub-actions/datahub-ingestion/entrypoint.sh
+!datahub/datahub-actions/datahub-ingestion/requirements.txt
+!datahub/datahub-actions/entrypoint.sh
+!datahub/datahub-actions/start_datahub_actions.sh
+
+# 明确允许 .yml 文件被跟踪
+!datahub/datahub-actions/datahub-ingestion/*.yml
+!datahub/datahub-actions/datahub-ingestion/*.sh
+
+# 忽略 venv lock 文件
+datahub/datahub-actions/tmp/datahub/ingest/venv-mysql-*.lock
+# 忽略 zookeeper hsperfdata 文件
+datahub/zookeeper/tmp/hsperfdata_appuser/
+
